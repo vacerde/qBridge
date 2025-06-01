@@ -1,39 +1,46 @@
-import { ComponentPropsWithoutRef, CSSProperties, FC } from "react";
+import React from 'react';
 
-import { cn } from "@/lib/utils";
-
-export interface AnimatedShinyTextProps
-  extends ComponentPropsWithoutRef<"span"> {
-  shimmerWidth?: number;
+interface ShinyTextProps {
+    text: string;
+    disabled?: boolean;
+    speed?: number;
+    className?: string;
 }
 
-export const AnimatedShinyText: FC<AnimatedShinyTextProps> = ({
-  children,
-  className,
-  shimmerWidth = 100,
-  ...props
-}) => {
-  return (
-    <span
-      style={
-        {
-          "--shiny-width": `${shimmerWidth}px`,
-        } as CSSProperties
-      }
-      className={cn(
-        "mx-auto max-w-md text-neutral-600/70 dark:text-neutral-400/70",
+const ShinyText: React.FC<ShinyTextProps> = ({ text, disabled = false, speed = 5, className = '' }) => {
+    const animationDuration = `${speed}s`;
 
-        // Shine effect
-        "animate-shiny-text bg-clip-text bg-no-repeat [background-position:0_0] [background-size:var(--shiny-width)_100%] [transition:background-position_1s_cubic-bezier(.6,.6,0,1)_infinite]",
-
-        // Shine gradient
-        "bg-gradient-to-r from-transparent via-black/80 via-50% to-transparent  dark:via-white/80",
-
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </span>
-  );
+    return (
+        <div
+            className={`text-[#b5b5b5a4] bg-clip-text inline-block ${disabled ? '' : 'animate-shine'} ${className}`}
+            style={{
+                backgroundImage: 'linear-gradient(120deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 60%)',
+                backgroundSize: '200% 100%',
+                WebkitBackgroundClip: 'text',
+                animationDuration: animationDuration,
+            }}
+        >
+            {text}
+        </div>
+    );
 };
+
+export default ShinyText;
+
+// tailwind.config.js
+// module.exports = {
+//   theme: {
+//     extend: {
+//       keyframes: {
+//         shine: {
+//           '0%': { 'background-position': '100%' },
+//           '100%': { 'background-position': '-100%' },
+//         },
+//       },
+//       animation: {
+//         shine: 'shine 5s linear infinite',
+//       },
+//     },
+//   },
+//   plugins: [],
+// };

@@ -3,22 +3,22 @@ import {
   Terminal,
   TypingAnimation,
 } from "@/components/magicui/terminal";
+import AnimatedBadge from "../ui/animated-badge";
 
 export function LandingInstallation() {
   return (
     <div id="installation" className="h-auto py-24 sm:py-32">
       <div className="h-auto mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <div className="flex items-center justify-center">
-          <h2 className="px-3 border rounded-full text-base font-semibold leading-7 text-primary hover:bg-muted/50 transition-colors duration-200">
-            How to install
-          </h2>
-          </div>
+
+
+          <AnimatedBadge icon="🔧" text="How to install" />
+
           <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
             Running qBridge made easy
           </p>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            The qBridge CLI tool simplifies the process of setting up and managing your qBridge project, allowing you to focus on building your application without worrying about the underlying infrastructure.
+            The qBridge CLI tool simplifies the process of setting up and managing your project, allowing you to focus on building your application without worrying about the underlying infrastructure.
           </p>
         </div>
         <div className="mx-auto flex justify-center items-start mt-10">
