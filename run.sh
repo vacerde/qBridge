@@ -136,7 +136,6 @@ safe_execute() {
 }
 
 # Cleanup function
-# Improved cleanup function with better process tree killing
 cleanup() {
     if [[ $CLEANUP_CALLED == true ]]; then
         debug_log "Cleanup already called, skipping"
@@ -193,46 +192,6 @@ cleanup() {
             fi
         fi
 
-        # Enhanced port cleanup - kill processes by port with retries
-        for PORT in 3000 3001; do
-            local retry_count=0
-            local max_retries=3
-            
-            while [[ $retry_count -lt $max_retries ]]; do
-                local PIDS=$(lsof -ti tcp:$PORT 2>/dev/null || true)
-                
-                if [[ -n "$PIDS" ]]; then
-                    verbose_log "Attempt $((retry_count + 1)): Killing processes on port $PORT: $PIDS"
-                    
-                    # Try graceful shutdown first
-                    for PID in $PIDS; do
-                        kill -TERM "$PID" 2>/dev/null || true
-                    done
-                    
-                    sleep 1
-                    
-                    # Force kill if still there
-                    local REMAINING_PIDS=$(lsof -ti tcp:$PORT 2>/dev/null || true)
-                    if [[ -n "$REMAINING_PIDS" ]]; then
-                        for PID in $REMAINING_PIDS; do
-                            kill -KILL "$PID" 2>/dev/null || true
-                        done
-                    fi
-                    
-                    sleep 1
-                    ((retry_count++))
-                else
-                    debug_log "Port $PORT is now free"
-                    break
-                fi
-            done
-            
-            # Final check
-            local FINAL_PIDS=$(lsof -ti tcp:$PORT 2>/dev/null || true)
-            if [[ -n "$FINAL_PIDS" ]]; then
-                error_log "Failed to free port $PORT after $max_retries attempts. PIDs still running: $FINAL_PIDS"
-            fi
-        done
 
         verbose_log "Stopping Docker containers"
         docker stop qBridge-db qBridge-mongo 2>/dev/null || true
