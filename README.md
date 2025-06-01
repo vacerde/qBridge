@@ -2,6 +2,9 @@
 
 qBridge is a powerful development platform that combines workspace management, real-time collaboration, and AI assistance in a single integrated environment.
 
+## Info
+This is completely under heavy development. The software is AS IS and do not expect support in any way. Bugs may and probably will appear!
+
 ## Features
 
 - **Workspace Management**: Create isolated development environments with preconfigured templates
@@ -22,9 +25,8 @@ qBridge is a powerful development platform that combines workspace management, r
 ## Project Structure
 
 - `/frontend`: Next.js application
-- `/backend`: Rust backend service
-- `/workspace-service`: Rust service for managing workspace containers
-- `docker-compose.yml`: Configuration for running all services
+- `/backend`: NodeJS backend service
+- `docker-compose.yml`: Configuration for running all services (Not tested!)
 - `run.sh`: Main startup script
 
 ## Getting Started
@@ -38,8 +40,8 @@ qBridge is a powerful development platform that combines workspace management, r
 
 1. Clone the repository
    ```
-   git clone https://github.com/your-org/devforge.git
-   cd devforge
+   git clone https://github.com/vacerde/qBridge.git
+   cd qBridge
    ```
 
 2. Start the development environment
