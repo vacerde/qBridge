@@ -8,7 +8,7 @@ import { AuthProvider } from '@/components/providers/auth-provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'DevForge - Collaborative Coding Platform',
+  title: 'qBridge',
   description: 'A comprehensive full-stack coding platform with integrated workspace management, real-time collaboration, and AI assistance',
 };
 
