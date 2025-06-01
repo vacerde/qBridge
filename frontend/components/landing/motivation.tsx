@@ -97,11 +97,11 @@ export function LandingMotivation() {
 
                 {/* Section 3: Tech Stack with Icon */}
                 <div className="flex flex-col lg:flex-row items-center gap-16 mb-32">
-                    <div className="flex-1 space-y-4">
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                    <div className="flex-1">
+                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             Built with Next.js and Powered by Docker containers.
                         </TextReveal>
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             Secured with enterprise-grade encryption.
                         </TextReveal>
                     </div>
@@ -123,7 +123,7 @@ export function LandingMotivation() {
 
                 {/* Final Section: Brand Statement */}
                 <div className="text-center space-y-4">
-                    <TextReveal className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
+                    <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
                         Welcome to the future of development.
                     </TextReveal>
                 </div>
