@@ -136,6 +136,7 @@ safe_execute() {
 }
 
 # Cleanup function
+# Improved cleanup function with better process tree killing
 cleanup() {
     if [[ $CLEANUP_CALLED == true ]]; then
         debug_log "Cleanup already called, skipping"
@@ -152,27 +153,84 @@ cleanup() {
     if [[ $SERVICES_STARTED == true ]]; then
         echo "Shutting down qBridge services..."
 
-        if [[ -n "$FRONTEND_PID" ]] && kill -0 "$FRONTEND_PID" 2>/dev/null; then
-            verbose_log "Stopping frontend (PID: $FRONTEND_PID)"
-            pkill -P "$FRONTEND_PID" 2>/dev/null || true
-            kill "$FRONTEND_PID" 2>/dev/null || true
-
-            while kill -0 "$FRONTEND_PID" 2>/dev/null; do
-                sleep 0.2
-            done
+        # Enhanced frontend cleanup
+        if [[ -n "$FRONTEND_PID" ]]; then
+            verbose_log "Stopping frontend process tree (PID: $FRONTEND_PID)"
+            
+            # Kill entire process group
+            if kill -0 "$FRONTEND_PID" 2>/dev/null; then
+                # Send TERM signal to process group
+                kill -TERM -$FRONTEND_PID 2>/dev/null || true
+                
+                # Give it time to shut down gracefully
+                sleep 3
+                
+                # Force kill if still running
+                if kill -0 "$FRONTEND_PID" 2>/dev/null; then
+                    kill -KILL -$FRONTEND_PID 2>/dev/null || true
+                fi
+            fi
+            
+            # Additional cleanup for Next.js processes
+            pkill -f "next-router-worker" 2>/dev/null || true
+            pkill -f "next dev" 2>/dev/null || true
+            pkill -f "npm run dev" 2>/dev/null || true
         fi
 
-        if [[ -n "$BACKEND_PID" ]] && kill -0 "$BACKEND_PID" 2>/dev/null; then
-            verbose_log "Stopping backend (PID: $BACKEND_PID)"
-            pkill -P "$BACKEND_PID" 2>/dev/null || true
-            kill "$BACKEND_PID" 2>/dev/null || true
+        # Enhanced backend cleanup
+        if [[ -n "$BACKEND_PID" ]]; then
+            verbose_log "Stopping backend process tree (PID: $BACKEND_PID)"
+            
+            if kill -0 "$BACKEND_PID" 2>/dev/null; then
+                # Kill process group
+                kill -TERM -$BACKEND_PID 2>/dev/null || true
+                sleep 2
+                
+                # Force kill if needed
+                if kill -0 "$BACKEND_PID" 2>/dev/null; then
+                    kill -KILL -$BACKEND_PID 2>/dev/null || true
+                fi
+            fi
         fi
 
+        # Enhanced port cleanup - kill processes by port with retries
         for PORT in 3000 3001; do
-            PID=$(lsof -ti tcp:$PORT)
-            if [[ -n "$PID" ]]; then
-                verbose_log "Killing process on port $PORT (PID: $PID)"
-                kill -9 "$PID" 2>/dev/null || true
+            local retry_count=0
+            local max_retries=3
+            
+            while [[ $retry_count -lt $max_retries ]]; do
+                local PIDS=$(lsof -ti tcp:$PORT 2>/dev/null || true)
+                
+                if [[ -n "$PIDS" ]]; then
+                    verbose_log "Attempt $((retry_count + 1)): Killing processes on port $PORT: $PIDS"
+                    
+                    # Try graceful shutdown first
+                    for PID in $PIDS; do
+                        kill -TERM "$PID" 2>/dev/null || true
+                    done
+                    
+                    sleep 1
+                    
+                    # Force kill if still there
+                    local REMAINING_PIDS=$(lsof -ti tcp:$PORT 2>/dev/null || true)
+                    if [[ -n "$REMAINING_PIDS" ]]; then
+                        for PID in $REMAINING_PIDS; do
+                            kill -KILL "$PID" 2>/dev/null || true
+                        done
+                    fi
+                    
+                    sleep 1
+                    ((retry_count++))
+                else
+                    debug_log "Port $PORT is now free"
+                    break
+                fi
+            done
+            
+            # Final check
+            local FINAL_PIDS=$(lsof -ti tcp:$PORT 2>/dev/null || true)
+            if [[ -n "$FINAL_PIDS" ]]; then
+                error_log "Failed to free port $PORT after $max_retries attempts. PIDs still running: $FINAL_PIDS"
             fi
         done
 
@@ -191,6 +249,39 @@ cleanup() {
 
     if [[ $DEBUG_MODE == true ]]; then
         echo "Debug log saved to: $DEBUG_LOG"
+    fi
+}
+
+
+# Additional helper function for emergency port cleanup
+emergency_port_cleanup() {
+    local port=$1
+    verbose_log "Emergency cleanup for port $port"
+    
+    # Find all processes using the port
+    local pids=$(ss -tlnp 2>/dev/null | grep ":$port " | grep -o 'pid=[0-9]*' | cut -d'=' -f2 | sort -u || true)
+    
+    if [[ -n "$pids" ]]; then
+        verbose_log "Found processes on port $port: $pids"
+        for pid in $pids; do
+            if [[ -n "$pid" ]] && kill -0 "$pid" 2>/dev/null; then
+                verbose_log "Force killing PID $pid on port $port"
+                kill -KILL "$pid" 2>/dev/null || true
+            fi
+        done
+    fi
+    
+    # Alternative method using netstat if ss is not available
+    if command -v netstat >/dev/null 2>&1; then
+        local netstat_pids=$(netstat -tlnp 2>/dev/null | grep ":$port " | awk '{print $7}' | cut -d'/' -f1 | grep -v '-' || true)
+        if [[ -n "$netstat_pids" ]]; then
+            for pid in $netstat_pids; do
+                if [[ -n "$pid" ]] && [[ "$pid" =~ ^[0-9]+$ ]] && kill -0 "$pid" 2>/dev/null; then
+                    verbose_log "Netstat found PID $pid on port $port, killing"
+                    kill -KILL "$pid" 2>/dev/null || true
+                fi
+            done
+        fi
     fi
 }
 
@@ -380,7 +471,8 @@ start_frontend() {
         npm run build >>"$FRONTEND_LOG" 2>&1
 
         verbose_log "Starting production server..."
-        nohup npm run start >>"$FRONTEND_LOG" 2>&1 &
+        # Start in new process group so we can kill the entire tree
+        setsid nohup npm run start >>"$FRONTEND_LOG" 2>&1 &
         FRONTEND_PID=$!
     else
         verbose_log "Starting frontend in development mode"
@@ -390,8 +482,18 @@ start_frontend() {
             npm install >>"$FRONTEND_LOG" 2>&1
         fi
 
-        # Start development server
-        nohup npm run dev >>"$FRONTEND_LOG" 2>&1 &
+        # Kill any existing Next.js processes on port 3000 before starting
+        local EXISTING_PIDS=$(lsof -ti tcp:3000 2>/dev/null || true)
+        if [[ -n "$EXISTING_PIDS" ]]; then
+            verbose_log "Killing existing processes on port 3000: $EXISTING_PIDS"
+            for PID in $EXISTING_PIDS; do
+                kill -KILL "$PID" 2>/dev/null || true
+            done
+            sleep 2
+        fi
+
+        # Start development server in new process group
+        setsid nohup npm run dev >>"$FRONTEND_LOG" 2>&1 &
         FRONTEND_PID=$!
     fi
 
@@ -408,7 +510,6 @@ start_frontend() {
         return 1
     fi
 }
-
 # Resource monitoring
 get_system_resources() {
     local cpu_usage="N/A"
