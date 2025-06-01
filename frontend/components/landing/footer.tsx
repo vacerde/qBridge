@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Code, Github, Twitter, Linkedin } from "lucide-react";
+import { TbDeviceDesktopCode } from "react-icons/tb";
 
 export function LandingFooter() {
   const currentYear = new Date().getFullYear();
@@ -12,9 +13,9 @@ export function LandingFooter() {
           <div className="space-y-8">
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold">DF</span>
+                <TbDeviceDesktopCode />
               </div>
-              <span className="font-semibold text-lg">DevForge</span>
+              <span className="font-semibold text-lg">qBridge</span>
             </div>
             <p className="text-sm leading-6 text-muted-foreground">
               A comprehensive development platform for teams to build, collaborate, and deploy software projects.
