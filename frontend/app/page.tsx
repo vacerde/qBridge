@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { LandingHero } from "@/components/landing/hero";
+import { LandingInstallation } from "@/components/landing/installation";
 import { LandingFeatures } from "@/components/landing/features";
 import { LandingDemo } from "@/components/landing/demo";
 import { LandingPricing } from "@/components/landing/pricing";
@@ -12,6 +13,7 @@ export default function Home() {
       <LandingHeader />
       <main className="">
         <LandingHero />
+        <LandingInstallation />
         <LandingFeatures />
         <LandingDemo />
         <LandingPricing />
