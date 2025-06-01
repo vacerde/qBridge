@@ -8,9 +8,9 @@ import { LandingHeader } from "@/components/landing/header";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen w-full overflow-hidden">
       <LandingHeader />
-      <main className="flex-1">
+      <main className="">
         <LandingHero />
         <LandingFeatures />
         <LandingDemo />
