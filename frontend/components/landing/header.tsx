@@ -23,10 +23,10 @@ export function LandingHeader() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">DevForge</span>
+            <span className="sr-only">qBridge</span>
             <div className="flex items-center gap-2">
               <TbDeviceDesktopCode />
-              <span className="font-semibold text-lg">DevForge</span>
+              <span className="font-semibold text-lg">qBridge</span>
             </div>
           </Link>
         </div>
