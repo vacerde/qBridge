@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'qBridge',
   description: 'A comprehensive full-stack coding platform with integrated workspace management, real-time collaboration, and AI assistance',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   openGraph: {
     images: "/og-image.png",
   },
