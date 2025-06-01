@@ -10,10 +10,10 @@ export function LandingMotivation() {
                 {/* Section 1: Problem Statement with Icon */}
                 <div className="flex flex-col lg:flex-row items-center gap-16 mb-32">
                     <div className="flex-1 space-y-4">
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             qBridge combines workspace management,
                         </TextReveal>
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             real-time collaboration and AI assistance
                         </TextReveal>
                     </div>
@@ -33,10 +33,10 @@ export function LandingMotivation() {
 
 
                 <div className="flex justify-between items-center">
-                    <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                    <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                         Create isolated development environments.
                     </TextReveal>
-                    <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                    <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                         Everything in a single integrated environment.
                     </TextReveal>
                 </div>
@@ -44,16 +44,16 @@ export function LandingMotivation() {
                 {/* Section 2: Features with Icon - Reversed */}
                 <div className="flex flex-col lg:flex-row-reverse items-center gap-0 mb-32">
                     <div className="flex-1 space-y-4">
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             Work with your team simultaneously.
                         </TextReveal>
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             Get help from multiple AI providers.
                         </TextReveal>
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             Connect via SSH for seamless transfers.
                         </TextReveal>
-                        <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
+                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             Deploy directly from the platform.
                         </TextReveal>
                     </div>
@@ -101,7 +101,7 @@ export function LandingMotivation() {
                         <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             Built with Next.js and Powered by Docker containers.
                         </TextReveal>
-                        <TextReveal className="text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
+                        <TextReveal className="flex justify-end text-2xl md:text-3xl lg:text-4xl font-medium leading-tight">
                             Secured with enterprise-grade encryption.
                         </TextReveal>
                     </div>
@@ -122,8 +122,8 @@ export function LandingMotivation() {
                 </div>
 
                 {/* Final Section: Brand Statement */}
-                <div className="text-center space-y-4">
-                    <TextReveal className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+                <div className="text-right space-y-4">
+                    <TextReveal className="flex justify-center text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
                         Welcome to the future of development.
                     </TextReveal>
                 </div>

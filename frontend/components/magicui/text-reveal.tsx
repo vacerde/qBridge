@@ -20,16 +20,18 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   const words = children.split(" ");
 
   return (
-    <div ref={targetRef} className={cn("relative z-0", className)}>
+    <div ref={targetRef} className={cn("relative z-0")}>
       <div
         className={
-          "sticky top-0 mx-auto flex h-[50%] max-w-4xl items-center bg-transparent px-[1rem]"
+          "sticky top-0 mx-auto flex h-[50%] max-w-4xl bg-transparent px-[1rem]"
         }
       >
         <span
           ref={targetRef}
-          className={
-            "flex flex-wrap p-5 font-bold text-black dark:text-white md:p-8 lg:p-10"
+          className={cn(
+            "flex flex-wrap p-5 font-bold text-black dark:text-white md:p-8 lg:p-10",
+            className
+          )
           }
         >
           {words.map((word, i) => {
