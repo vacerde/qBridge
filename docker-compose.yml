@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    depends_on:
+      - backend
+    networks:
+      - devforge-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/devforge
+      - JWT_SECRET=your-secret-key-here
+    depends_on:
+      - db
+    networks:
+      - devforge-network
+
+  workspace-service:
+    build:
+      context: ./workspace-service
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - workspace-data:/workspace-data
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/devforge
+    depends_on:
+      - db
+    networks:
+      - devforge-network
+
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=devforge
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - devforge-network
+
+networks:
+  devforge-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  workspace-data:
