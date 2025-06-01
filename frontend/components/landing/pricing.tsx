@@ -113,7 +113,7 @@ export function LandingPricing() {
               </CardHeader>
               <CardContent className="grid gap-4">
                 <div className="text-3xl font-bold">
-                  ${annual ? plan.price.annual / 12 : plan.price.monthly}
+                  ${(annual ? plan.price.annual / 12 : plan.price.monthly).toFixed(2)}
                   <span className="text-sm font-normal text-muted-foreground">
                     /month{annual ? ' (billed annually)' : ''}
                   </span>
