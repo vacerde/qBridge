@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/theme-toggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
-import { TbDeviceDesktopCode } from "react-icons/tb";
+import { TbDeviceDesktopCode } from "react-icons/tb"; 
 
 const navigation = [
   { name: "Features", href: "#features" },
@@ -25,9 +25,7 @@ export function LandingHeader() {
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">DevForge</span>
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold">DF</span>
-              </div>
+              <TbDeviceDesktopCode />
               <span className="font-semibold text-lg">DevForge</span>
             </div>
           </Link>
