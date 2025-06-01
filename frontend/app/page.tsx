@@ -6,6 +6,7 @@ import { LandingDemo } from "@/components/landing/demo";
 import { LandingPricing } from "@/components/landing/pricing";
 import { LandingFooter } from "@/components/landing/footer";
 import { LandingHeader } from "@/components/landing/header";
+import { LandingMotivation } from "@/components/landing/motivation";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="">
         <LandingHero />
         <LandingInstallation />
+        <LandingMotivation />
         <LandingFeatures />
         <LandingDemo />
         <LandingPricing />
