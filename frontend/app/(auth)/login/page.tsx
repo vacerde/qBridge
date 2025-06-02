@@ -71,7 +71,7 @@ export default function LoginPage() {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              "DevForge has transformed how our team collaborates. The integrated workspace and AI assistance have significantly accelerated our development cycles."
+              &quot;DevForge has transformed how our team collaborates. The integrated workspace and AI assistance have significantly accelerated our development cycles.&quot;
             </p>
             <footer className="text-sm">Sofia Chen, CTO at TechWave</footer>
           </blockquote>
@@ -133,7 +133,7 @@ export default function LoginPage() {
           </Card>
           
           <p className="text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link 
               href="/signup" 
               className="underline underline-offset-4 hover:text-primary"
