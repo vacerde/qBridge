@@ -93,7 +93,7 @@ export default function SignupPage() {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              "DevForge has transformed how our team collaborates. The integrated workspace and AI assistance have significantly accelerated our development cycles."
+              &quot;DevForge has transformed how our team collaborates. The integrated workspace and AI assistance have significantly accelerated our development cycles.&quot;
             </p>
             <footer className="text-sm">Sofia Chen, CTO at TechWave</footer>
           </blockquote>
