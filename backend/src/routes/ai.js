@@ -125,7 +125,7 @@ router.post("/code", validateCodeRequest, async (req, res) => {
 // AI provider handlers
 async function handleOpenAIChat(message, model, context) {
   const messages = [
-    { role: "system", content: "You are a helpful coding assistant for DevForge IDE." },
+    { role: "system", content: "You are a helpful coding assistant for qBridge IDE." },
     ...context.map((msg) => ({ role: msg.role, content: msg.content })),
     { role: "user", content: message },
   ]
@@ -146,7 +146,7 @@ async function handleOpenAIChat(message, model, context) {
 
 async function handleGroqChat(message, model, context) {
   const messages = [
-    { role: "system", content: "You are a helpful coding assistant for DevForge IDE." },
+    { role: "system", content: "You are a helpful coding assistant for qBridge IDE." },
     ...context.map((msg) => ({ role: msg.role, content: msg.content })),
     { role: "user", content: message },
   ]
@@ -166,7 +166,7 @@ async function handleGroqChat(message, model, context) {
 }
 
 async function handleAnthropicChat(message, model, context) {
-  const systemMessage = "You are a helpful coding assistant for DevForge IDE."
+  const systemMessage = "You are a helpful coding assistant for qBridge IDE."
   const userMessage =
     context.length > 0
       ? `${context.map((msg) => `${msg.role}: ${msg.content}`).join("\n")}\n\nuser: ${message}`

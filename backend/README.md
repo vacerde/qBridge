@@ -1,4 +1,4 @@
-# DevForge Backend
+# qBridge Backend
 
 A comprehensive full-stack coding platform backend with integrated workspace management, real-time collaboration capabilities, and AI assistance.
 
@@ -34,7 +34,7 @@ A comprehensive full-stack coding platform backend with integrated workspace man
 1. Clone the repository:
 \`\`\`bash
 git clone <repository-url>
-cd devforge-backend
+cd qBridge-backend
 \`\`\`
 
 2. Make the startup script executable:
@@ -70,8 +70,8 @@ cp .env.example .env
 
 4. Start MongoDB and Redis:
 \`\`\`bash
-docker run -d --name devforge-mongo -p 27017:27017 mongo:6.0
-docker run -d --name devforge-redis -p 6379:6379 redis:7-alpine
+docker run -d --name qBridge-mongo -p 27017:27017 mongo:6.0
+docker run -d --name qBridge-redis -p 6379:6379 redis:7-alpine
 \`\`\`
 
 5. Start the application:

@@ -45,8 +45,8 @@ done
 # Set bash options more carefully
 if [[ $DEBUG_MODE == true ]]; then
     set -x # Enable command tracing in debug mode
-    exec 2> >(tee -a /tmp/devforge_debug.log >&2)
-    echo "DEBUG: Debug mode enabled, logging to /tmp/devforge_debug.log"
+    exec 2> >(tee -a /tmp/qBridge_debug.log >&2)
+    echo "DEBUG: Debug mode enabled, logging to /tmp/qBridge_debug.log"
 fi
 
 # Don't use set -e initially to prevent early exits
@@ -95,10 +95,10 @@ BACKEND_LOG_SIZE=0
 RESOURCE_UPDATE_COUNTER=0
 
 # Temporary files for capturing logs
-FRONTEND_LOG="/tmp/devforge_frontend.log"
-BACKEND_LOG="/tmp/devforge_backend.log"
-RESOURCE_LOG="/tmp/devforge_resources.log"
-DEBUG_LOG="/tmp/devforge_debug.log"
+FRONTEND_LOG="/tmp/qBridge_frontend.log"
+BACKEND_LOG="/tmp/qBridge_backend.log"
+RESOURCE_LOG="/tmp/qBridge_resources.log"
+DEBUG_LOG="/tmp/qBridge_debug.log"
 
 # Debug and logging functions
 debug_log() {
@@ -341,7 +341,7 @@ start_database() {
     if safe_execute "docker run --name qBridge-db \
         -e POSTGRES_PASSWORD=postgres \
         -e POSTGRES_USER=postgres \
-        -e POSTGRES_DB=devforge \
+        -e POSTGRES_DB=qBridge \
         -p 5432:5432 \
         -d postgres:14" "Start PostgreSQL container"; then
 

@@ -16,7 +16,7 @@ services:
     depends_on:
       - backend
     networks:
-      - devforge-network
+      - qBridge-network
 
   backend:
     build:
@@ -27,12 +27,12 @@ services:
     volumes:
       - ./backend:/app
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/devforge
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/qBridge
       - JWT_SECRET=your-secret-key-here
     depends_on:
       - db
     networks:
-      - devforge-network
+      - qBridge-network
 
   workspace-service:
     build:
@@ -44,11 +44,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - workspace-data:/workspace-data
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/devforge
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/qBridge
     depends_on:
       - db
     networks:
-      - devforge-network
+      - qBridge-network
 
   db:
     image: postgres:14
@@ -57,14 +57,14 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=devforge
+      - POSTGRES_DB=qBridge
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-      - devforge-network
+      - qBridge-network
 
 networks:
-  devforge-network:
+  qBridge-network:
     driver: bridge
 
 volumes:

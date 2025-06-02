@@ -15,7 +15,7 @@ export default function DashboardLayout({
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
               <span className="text-primary-foreground font-bold">DF</span>
             </div>
-            <span className="font-semibold text-lg">DevForge</span>
+            <span className="font-semibold text-lg">qBridge</span>
           </div>
           <div className="flex items-center gap-2">
             <ModeToggle />

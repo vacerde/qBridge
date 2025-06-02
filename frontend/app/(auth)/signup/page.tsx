@@ -88,12 +88,12 @@ export default function SignupPage() {
           <div className="h-8 w-8 rounded-lg bg-white flex items-center justify-center">
             <span className="text-primary font-bold">DF</span>
           </div>
-          <span className="font-semibold text-lg text-white">DevForge</span>
+          <span className="font-semibold text-lg text-white">qBridge</span>
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              &quot;DevForge has transformed how our team collaborates. The integrated workspace and AI assistance have significantly accelerated our development cycles.&quot;
+              &quot;qBridge has transformed how our team collaborates. The integrated workspace and AI assistance have significantly accelerated our development cycles.&quot;
             </p>
             <footer className="text-sm">Sofia Chen, CTO at TechWave</footer>
           </blockquote>
@@ -106,7 +106,7 @@ export default function SignupPage() {
               Create an account
             </h1>
             <p className="text-sm text-muted-foreground">
-              Join thousands of developers building with DevForge
+              Join thousands of developers building with qBridge
             </p>
           </div>
 

@@ -11,7 +11,7 @@ const authenticateToken = async (req, res, next) => {
       return res.status(401).json({ error: "Access token required" })
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "devforge-jwt-secret")
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "qBridge-jwt-secret")
 
     // Get user from database to ensure they still exist and are active
     const user = await User.findById(decoded.id).select("-password")

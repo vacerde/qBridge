@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function WorkspaceTerminal() {
   const [terminalLines, setTerminalLines] = useState<string[]>([
-    "$ Welcome to DevForge Terminal",
+    "$ Welcome to qBridge Terminal",
     "$ Type 'help' to see available commands",
     "$"
   ]);

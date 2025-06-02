@@ -40,7 +40,7 @@ const cleanupOldContainers = async () => {
   try {
     const containers = await docker.listContainers({
       all: true,
-      filters: { label: ["service=devforge-workspace"] },
+      filters: { label: ["service=qBridge-workspace"] },
     })
 
     const now = Date.now()

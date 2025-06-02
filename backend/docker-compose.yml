@@ -8,7 +8,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=9000
-      - MONGODB_URI=mongodb://mongo:27017/devforge
+      - MONGODB_URI=mongodb://mongo:27017/qBridge
       - REDIS_URL=redis://redis:6379
       - JWT_SECRET=your-super-secret-jwt-key
       - SESSION_SECRET=your-super-secret-session-key
@@ -28,7 +28,7 @@ services:
     volumes:
       - mongo-data:/data/db
     environment:
-      - MONGO_INITDB_DATABASE=devforge
+      - MONGO_INITDB_DATABASE=qBridge
     restart: unless-stopped
 
   redis:

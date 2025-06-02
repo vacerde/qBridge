@@ -15,7 +15,7 @@ const setupWebSocket = (io) => {
         return next(new Error("Authentication error"))
       }
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || "devforge-jwt-secret")
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || "qBridge-jwt-secret")
       const user = await User.findById(decoded.id).select("-password")
 
       if (!user || !user.isActive) {

@@ -149,7 +149,7 @@ export function LandingFooter() {
         </div>
         <div className="mt-16 border-t pt-8">
           <p className="text-xs leading-5 text-muted-foreground">
-            &copy; {currentYear} DevForge, Inc. All rights reserved.
+            &copy; {currentYear} qBridge, Inc. All rights reserved.
           </p>
         </div>
       </div>

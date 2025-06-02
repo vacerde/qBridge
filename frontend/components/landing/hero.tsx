@@ -54,7 +54,7 @@ export function LandingHero() {
             ></span>
           </h2>
           <p className="max-w-3xl lg:mx-0 lg:max-w-5xl mt-6 text-lg leading-8 text-muted-foreground">
-            DevForge combines powerful IDE capabilities with real-time collaboration and AI assistance to streamline your development workflow. Create, collaborate, and deploy all from one platform.
+            qBridge combines powerful IDE capabilities with real-time collaboration and AI assistance to streamline your development workflow. Create, collaborate, and deploy all from one platform.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
             <Link href="/signup">

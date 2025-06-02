@@ -67,7 +67,7 @@ router.post("/register", validateRegister, async (req, res) => {
         username: user.username,
         role: user.role,
       },
-      process.env.JWT_SECRET || "devforge-jwt-secret",
+      process.env.JWT_SECRET || "qBridge-jwt-secret",
       { expiresIn: "24h" },
     )
 
@@ -130,7 +130,7 @@ router.post("/login", validateLogin, async (req, res) => {
         username: user.username,
         role: user.role,
       },
-      process.env.JWT_SECRET || "devforge-jwt-secret",
+      process.env.JWT_SECRET || "qBridge-jwt-secret",
       { expiresIn: "24h" },
     )
 
@@ -162,7 +162,7 @@ router.get("/profile", async (req, res) => {
       return res.status(401).json({ error: "No token provided" })
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "devforge-jwt-secret")
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "qBridge-jwt-secret")
     const user = await User.findById(decoded.id).select("-password")
 
     if (!user) {

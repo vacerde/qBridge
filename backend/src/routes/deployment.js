@@ -163,7 +163,7 @@ async function deployWorkspace(deployment, workspace) {
     const container = docker.getContainer(workspace.containerId)
 
     // Create deployment image
-    const imageName = `devforge-deploy-${deployment._id}`
+    const imageName = `qBridge-deploy-${deployment._id}`
 
     deployment.logs.push("Creating deployment image...")
     await deployment.save()

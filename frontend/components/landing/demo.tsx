@@ -18,7 +18,7 @@ export function LandingDemo() {
             See It In Action
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-            Experience the power of DevForge
+            Experience the power of qBridge
           </p>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
             Explore the key features of our platform through these interactive demos.

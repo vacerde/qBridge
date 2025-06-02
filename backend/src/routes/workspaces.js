@@ -100,9 +100,9 @@ router.post("/", validateCreateWorkspace, async (req, res) => {
     const container = await docker.createContainer({
       name: containerName,
       Image: config.image,
-      Env: [...config.env, `WORKSPACE_ID=${workspaceId}`, `USER_ID=${userId}`, "PASSWORD=devforge123"],
+      Env: [...config.env, `WORKSPACE_ID=${workspaceId}`, `USER_ID=${userId}`, "PASSWORD=qBridge123"],
       Labels: {
-        service: "devforge-workspace",
+        service: "qBridge-workspace",
         "workspace.id": workspaceId,
         "workspace.name": name,
         "workspace.template": template,

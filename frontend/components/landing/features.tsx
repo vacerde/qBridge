@@ -72,7 +72,7 @@ export function LandingFeatures() {
             Everything you need to build modern applications
           </p>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            DevForge combines the best tools and practices into a single platform
+            qBridge combines the best tools and practices into a single platform
             that streamlines your entire development workflow from start to
             finish.
           </p>

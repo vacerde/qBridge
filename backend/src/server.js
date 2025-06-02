@@ -33,7 +33,7 @@ const io = socketIo(server, {
 })
 
 const PORT = process.env.PORT || 9000
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/devforge"
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/qBridge"
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379"
 
 const redisClient = redis.createClient({ url: REDIS_URL })
@@ -60,7 +60,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }))
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),
-    secret: process.env.SESSION_SECRET || "devforge-secret-key",
+    secret: process.env.SESSION_SECRET || "qBridge-secret-key",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -138,7 +138,7 @@ async function startServer() {
     logger.info("WebSocket service initialized")
 
     server.listen(PORT, "0.0.0.0", () => {
-      logger.info(`DevForge backend server running on port ${PORT}`)
+      logger.info(`qBridge backend server running on port ${PORT}`)
     })
   } catch (error) {
     logger.error("Failed to start server:", error)
